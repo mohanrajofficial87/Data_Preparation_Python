@@ -1,0 +1,27 @@
+
+Big .CSV files cannot be loaded directly using pd.read_csv.
+
+In order to load the big .CSV file, the entire dataset should go through below transformation,
+  *First load small chunk of data
+    reader = pd.read_csv('../input/train.csv',chunksize=10)
+    type(reader) --> pandas.io.parsers.TextFileReader
+    
+    sample_chunk = None
+    for chunk in reader:
+      sample_chunk = chunk
+      print(sample_chunk)
+      break
+      
+    type(sample_chunk) --> pandas.core.frame.DataFrame
+    
+    Now we have the dataframe to inspect the datatypes
+    
+    columns = list(sample_chunk.columns)
+    print("Number of columns: {}".format(len(columns))) --> Gives the number of columns in the dataframe
+    
+    sample_chunk.info() --> Gives the information of all the columns, datatypes
+   
+  *Loading the objects as category
+  *Binary values are switched to int8
+  *Binary values with missing values are switched to float16 (int does not understand nan)
+  *64 bits encoding are all switched to 32, or 16 if possible
