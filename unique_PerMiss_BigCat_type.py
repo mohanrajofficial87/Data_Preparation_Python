@@ -1,5 +1,5 @@
 
-#Code to get the Unique values, % of missing values, % of values in the biggest category and type of the column
+#Code to get the Unique values, % of missing values, % of values in the biggest category and type of the column.
 
 stats= []
 for col in train.columns:
